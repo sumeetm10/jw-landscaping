@@ -49,16 +49,20 @@ export const staggerChild: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
 };
 
-export function Logo({ size = 64, className = "" }: { size?: number; className?: string }) {
+export function Logo({ size, spin = false, className = "" }: { size?: number; spin?: boolean; className?: string }) {
+  const reduce = useReducedMotion();
   return (
-    <img
-      src="/img/logo.png"
+    <motion.img
+      src="/img/logo-gold.webp"
       alt="J&W Landscaping"
-      width={size}
-      height={size}
+      width={size ?? 132}
+      height={size ?? 132}
       className={`select-none ${className}`}
-      style={{ width: size, height: size }}
+      style={size ? { width: size, height: size } : undefined}
       draggable={false}
+      initial={spin && !reduce ? { rotate: -360, scale: 0.4, opacity: 0 } : false}
+      animate={{ rotate: 0, scale: 1, opacity: 1 }}
+      transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
     />
   );
 }

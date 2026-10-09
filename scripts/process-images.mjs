@@ -65,3 +65,18 @@ await sharp(LOGO)
   .png()
   .toFile("public/img/logo.png");
 console.log("ok logo");
+
+const { data, info } = await sharp("public/img/logo.png").ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+const gold = Buffer.alloc(data.length);
+for (let i = 0; i < data.length; i += 4) {
+  const [rr, gg, bb, aa] = [data[i], data[i + 1], data[i + 2], data[i + 3]];
+  const k = Math.max(0, Math.min(1, (rr - bb - 32) / 70)) * (aa / 255);
+  gold[i] = Math.min(255, rr * 1.05 + 10);
+  gold[i + 1] = Math.min(255, gg * 1.05 + 6);
+  gold[i + 2] = bb;
+  gold[i + 3] = Math.round(k * 255);
+}
+
+await sharp(gold, { raw: info }).resize(420).webp({ quality: 88, alphaQuality: 90 }).toFile("public/img/logo-gold.webp");
+await sharp("public/img/logo.png").resize(96).png().toFile("public/favicon.png");
+console.log("ok logo-gold");

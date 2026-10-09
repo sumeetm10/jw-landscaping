@@ -30,7 +30,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-32 pt-14 md:px-6 md:pb-40 md:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:pb-48">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-32 pt-36 md:px-6 md:pb-40 md:pt-40 lg:pt-64 lg:grid-cols-[1.1fr_0.9fr] lg:pb-48">
         <div>
           <motion.p {...rise(0.05)} className="eyebrow mb-5 flex items-center gap-3 text-gold-light">
             Landscaping &amp; Outdoor Services
